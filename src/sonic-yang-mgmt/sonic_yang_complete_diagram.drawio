@@ -1,0 +1,434 @@
+<mxfile host="65bd71144e" pages="5">
+    <diagram name="1. Class Diagram" id="class-diagram">
+        <mxGraphModel dx="1233" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title1" value="Sonic YANG Management - Class Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="400" y="20" width="800" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="SonicYang" value="&lt;b&gt;SonicYang&lt;/b&gt;&lt;hr&gt;+ ctx: ly.Context&lt;br&gt;+ root: ly.Data_Node&lt;br&gt;+ yangFiles: list&lt;br&gt;+ confDbYangMap: dict&lt;br&gt;+ backlinkCache: dict&lt;hr&gt;- _load_schema_module()&lt;br&gt;- _validate_data()&lt;br&gt;- _find_data_node()&lt;br&gt;+ find_data_dependencies()&lt;br&gt;+ find_schema_dependencies()&lt;br&gt;+ validate_data_tree()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="100" width="280" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="ExtMixin" value="&lt;b&gt;SonicYangExtMixin&lt;/b&gt;&lt;hr&gt;+ loadYangModel()&lt;br&gt;+ loadData(configdbJson)&lt;br&gt;+ getData()&lt;br&gt;+ deleteNode(xpath)&lt;br&gt;+ XlateYangToConfigDB()&lt;hr&gt;- _xlateConfigDBtoYang()&lt;br&gt;- _revXlateYangtoConfigDB()&lt;br&gt;- _createDBTableToModuleMap()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="460" y="100" width="280" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="PathMixin" value="&lt;b&gt;SonicYangPathMixin&lt;/b&gt;&lt;hr&gt;+ configdb_path_to_xpath()&lt;br&gt;+ xpath_to_configdb_path()&lt;br&gt;+ configdb_path_split()&lt;br&gt;+ configdb_path_join()&lt;br&gt;+ xpath_split()&lt;br&gt;+ xpath_join()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="110" width="280" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="lyContext" value="&lt;b&gt;ly.Context&lt;/b&gt;&lt;hr&gt;+ parse_module_path()&lt;br&gt;+ parse_data_mem()&lt;br&gt;+ find_path()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="380" width="180" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="lyDataNode" value="&lt;b&gt;ly.Data_Node&lt;/b&gt;&lt;hr&gt;+ new_path()&lt;br&gt;+ find_path()&lt;br&gt;+ validate()&lt;br&gt;+ unlink()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="380" width="180" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=0;endSize=12;" parent="1" source="SonicYang" target="ExtMixin" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge1_label" value="继承" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="edge1" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=0;endSize=12;" parent="1" source="ExtMixin" target="PathMixin" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge2_label" value="继承" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="edge2" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" parent="1" source="SonicYang" target="lyContext" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge3_label" value="使用" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="edge3" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" parent="1" source="SonicYang" target="lyDataNode" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend1" value="&lt;b&gt;图例&lt;/b&gt;&lt;hr&gt;蓝色: 主类&lt;br&gt;绿色: 扩展 Mixin&lt;br&gt;黄色: 路径 Mixin&lt;br&gt;紫色: libyang 组件&lt;br&gt;&lt;hr&gt;实线: 继承&lt;br&gt;虚线: 使用" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="1200" y="100" width="200" height="180" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="2. Load YANG Model Flow" id="load-yang-flow">
+        <mxGraphModel dx="1233" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title2" value="Load YANG Model Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="400" y="20" width="800" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="start" value="开始" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="80" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="step1" value="创建 libyang Context&lt;br&gt;ly.Context(yang_dir)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="160" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step2" value="扫描 YANG 目录&lt;br&gt;查找所有 .yang 文件" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="260" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step3" value="加载每个 YANG 模块&lt;br&gt;ctx.parse_module_path()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="360" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step4" value="转换 YANG 为 JSON&lt;br&gt;module.print_mem(LYD_JSON)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="460" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step5" value="预处理 YANG Grouping&lt;br&gt;_preProcessYangGrouping()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="560" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step6" value="编译 Uses 子句&lt;br&gt;_compileUsesClause()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="660" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="step7" value="创建表到模块映射&lt;br&gt;_createDBTableToModuleMap()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="760" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="end1" value="完成&lt;br&gt;confDbYangMap 已创建" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="860" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="start" target="step1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step1" target="step2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step2" target="step3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step3" target="step4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step4" target="step5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step5" target="step6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step6" target="step7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="step7" target="end1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="note1" value="libyang 上下文管理&lt;br&gt;所有 YANG 模块" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="160" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="note2" value="处理 grouping 定义&lt;br&gt;展开嵌套结构" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="560" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="note3" value="confDbYangMap:&lt;br&gt;{TABLE: {module, container}}" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="760" width="220" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="3. ConfigDB to YANG Flow" id="configdb-to-yang">
+        <mxGraphModel dx="1233" dy="1987" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title3" value="ConfigDB to YANG Conversion Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="910" y="60" width="370" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="input" value="输入: ConfigDB JSON&lt;br&gt;{&quot;PORT&quot;: {&quot;Ethernet0&quot;: {...}}}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="465" y="-90" width="240" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="proc1" value="遍历 ConfigDB 表" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="465" y="10" width="240" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="proc2" value="查找表映射&lt;br&gt;confDbYangMap[table]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="465" y="100" width="240" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="decision1" value="是否为 List?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="505" y="190" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="list1" value="_xlateList()&lt;br&gt;处理列表类型" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="390" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="list2" value="提取键值&lt;br&gt;_extractKey()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="490" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="list3" value="转换字段类型&lt;br&gt;_findYangTypedValue()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="580" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="cont1" value="_xlateContainer()&lt;br&gt;处理容器类型" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="390" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="cont2" value="递归处理子元素" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="490" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="merge1" value="合并到 YANG JSON" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="680" width="380" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="load1" value="加载到数据树&lt;br&gt;ctx.parse_data_mem()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="770" width="280" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="output1" value="输出: YANG JSON + 数据树&lt;br&gt;{&quot;sonic-port:sonic-port&quot;: {...}}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="870" width="280" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="input" target="proc1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="proc1" target="proc2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="proc2" target="decision1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="decision1" target="list1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_4_label" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="arrow3_4" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="decision1" target="cont1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="730" y="230"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow3_5_label" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="arrow3_5" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="list1" target="list2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="list2" target="list3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="cont1" target="cont2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="list3" target="merge1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="cont2" target="merge1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="merge1" target="load1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow3_12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="load1" target="output1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="example1" value="示例 - List:&lt;br&gt;PORT/Ethernet0 →&lt;br&gt;PORT_LIST[name=&#39;Ethernet0&#39;]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="390" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="example2" value="类型转换:&lt;br&gt;&quot;up&quot; → enum&lt;br&gt;&quot;100&quot; → uint32" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="550" width="220" height="80" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="4. Path Conversion Flow" id="path-conversion">
+        <mxGraphModel dx="1233" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title4" value="Path Conversion: ConfigDB Path ? XPath" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="300" y="20" width="1000" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_title" value="ConfigDB Path → XPath" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="100" y="80" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_input" value="/PORT/Ethernet0/admin_status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="140" width="300" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_step1" value="分割路径&lt;br&gt;configdb_path_split()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="220" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_step2" value="tokens = [&quot;PORT&quot;, &quot;Ethernet0&quot;, &quot;admin_status&quot;]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="300" width="300" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_step3" value="查找 YANG 模型&lt;br&gt;confDbYangMap[&quot;PORT&quot;]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="370" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_step4" value="构建 XPath token&lt;br&gt;module:container/list[key=&#39;value&#39;]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="450" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_step5" value="连接 XPath&lt;br&gt;xpath_join()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="530" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="left_output" value="/sonic-port:sonic-port/PORT/&lt;br&gt;PORT_LIST[name=&#39;Ethernet0&#39;]/admin_status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="610" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_title" value="XPath → ConfigDB Path" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="900" y="80" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_input" value="/sonic-port:sonic-port/PORT/&lt;br&gt;PORT_LIST[name=&#39;Ethernet0&#39;]/admin_status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="140" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_step1" value="分割 XPath&lt;br&gt;xpath_split()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="240" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_step2" value="解析 predicate&lt;br&gt;[name=&#39;Ethernet0&#39;] → Ethernet0" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="320" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_step3" value="查找 ConfigDB 表名&lt;br&gt;从 confDbYangMap 反向查找" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="400" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_step4" value="构建 ConfigDB token&lt;br&gt;[table, key, field]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="480" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_step5" value="连接路径&lt;br&gt;configdb_path_join()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="560" width="300" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="right_output" value="/PORT/Ethernet0/admin_status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="640" width="300" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="left_input" target="left_step1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="left_step1" target="left_step2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="left_step2" target="left_step3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="left_step3" target="left_step4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="left_step4" target="left_step5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="left_step5" target="left_output" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="right_input" target="right_step1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="right_step1" target="right_step2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="right_step2" target="right_step3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="right_step3" target="right_step4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="right_step4" target="right_step5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow4_12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="right_step5" target="right_output" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="bidirectional" value="双向转换" style="shape=doubleArrow;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="380" width="300" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="5. Dependency Analysis Flow" id="dependency-flow">
+        <mxGraphModel dx="1233" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title5" value="Dependency Analysis Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="400" y="20" width="800" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_input" value="输入: XPath&lt;br&gt;/sonic-port:PORT/PORT_LIST[name=&#39;Ethernet0&#39;]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="100" width="400" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_step1" value="查找 Schema 节点&lt;br&gt;_find_schema_node(xpath)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="200" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_step2" value="检查缓存&lt;br&gt;backlinkCache[xpath]" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="300" width="240" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_cache_hit" value="返回缓存结果" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="1050" y="310" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_step3" value="遍历所有 Schema 节点&lt;br&gt;schema.tree_dfs()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="430" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_step4" value="检查 leafref 类型&lt;br&gt;type.base() == LY_TYPE_LEAFREF" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="530" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_step5" value="获取引用路径&lt;br&gt;type.path()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="630" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_decision" value="路径匹配?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="680" y="730" width="240" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_match" value="添加到依赖列表" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="1050" y="740" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_continue" value="继续遍历" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="740" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_cache" value="缓存结果&lt;br&gt;backlinkCache[xpath] = deps" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="860" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="dep_output" value="输出: 依赖路径列表&lt;br&gt;[&quot;/VLAN_MEMBER/...&quot;, &quot;/ACL_TABLE/...&quot;]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="960" width="400" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_input" target="dep_step1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_step1" target="dep_step2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_step2" target="dep_cache_hit" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_3_label" value="命中" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="arrow5_3" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_step2" target="dep_step3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_4_label" value="未命中" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="arrow5_4" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_step3" target="dep_step4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_step4" target="dep_step5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_step5" target="dep_decision" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_decision" target="dep_match" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_8_label" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="arrow5_8" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_decision" target="dep_continue" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_9_label" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;" parent="arrow5_9" vertex="1" connectable="0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;dashed=1;" parent="1" source="dep_continue" target="dep_step3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="520" y="460"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow5_11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;dashed=1;" parent="1" source="dep_match" target="dep_cache" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1140" y="890"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow5_12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;" parent="1" source="dep_cache" target="dep_output" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow5_13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;dashed=1;" parent="1" source="dep_cache_hit" target="dep_output" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1260" y="340"/>
+                            <mxPoint x="1260" y="1000"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="dep_example" value="示例:&lt;br&gt;查找引用 Ethernet0 的配置&lt;br&gt;&lt;br&gt;可能返回:&lt;br&gt;- /VLAN_MEMBER/Vlan100|Ethernet0&lt;br&gt;- /ACL_TABLE/.../ports (包含 Ethernet0)&lt;br&gt;- /BUFFER_PG/Ethernet0|0" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="400" width="400" height="160" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
